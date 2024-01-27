@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface FetchedItem {
   id: number;
@@ -10,17 +10,36 @@ interface FetchedItem {
   rating: { rate: number; count: number };
 }
 
-async function getStoreData(category: string) {
-  try {
-    const response = await fetch(
-      `https://fakestoreapi.com/products/category/${category}`
-    );
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
+const useStoreData = (category: string) => {
+  const [storedData, setStoredData] = useState<FetchedItem[]>([]);
+  const [error, setError] = useState<Error | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function getStoreData() {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          `https://fakestoreapi.com/products/category/${category}`
+        );
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const result = (await response.json()) as FetchedItem[];
+        setStoredData(result);
+        setIsLoading(false);
+        return;
+      } catch (error) {
+        setError(error as Error);
+        setIsLoading(false);
+        return error;
+      }
     }
-    const result = (await response.json()) as FetchedItem[];
-    return result;
-  } catch (error) {
-    return error;
-  }
-}
+    getStoreData().catch((error) => {
+      setError(error as Error);
+    });
+  }, [category]);
+  return { storedData, error, isLoading };
+};
+
+export default useStoreData;
