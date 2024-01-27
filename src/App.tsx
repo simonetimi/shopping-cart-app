@@ -1,12 +1,13 @@
 import './App.css';
 
 import Navbar from './components/Navbar';
+import Shop from './components/Shop';
 
 function App() {
-  // debug! prettier dosn't work in className
   return (
     <>
       <Navbar />
+      <Shop />
     </>
   );
 }

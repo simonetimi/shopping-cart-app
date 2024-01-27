@@ -4,7 +4,7 @@ function Navbar() {
   const menuStyles = tw`rounded-lg bg-white p-1.5 shadow-md active:translate-y-0.5`;
 
   return (
-    <nav className="flex h-16 items-center justify-between border-b-[1px] shadow-sm shadow-slate-200">
+    <nav className="col-span-full flex h-16 items-center justify-between border-b-[1px] shadow-sm shadow-slate-200">
       <div className="ml-6 flex flex-grow justify-center">
         <div className="flex gap-5">
           <button className={menuStyles}>Home</button>

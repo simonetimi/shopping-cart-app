@@ -8,7 +8,7 @@
   font-weight: 400;
 
   color: #333;
-  background-color: #FFF;
+  background-color: #fff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,10 +16,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+div#root {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 6.7fr;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 0,
     'wght' 400,
     'GRAD' 0,
-    'opsz' 24
+    'opsz' 24;
 }
