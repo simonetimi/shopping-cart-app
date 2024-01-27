@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-interface FetchedItem {
+export interface FetchedItem {
   id: number;
   title: string;
   price: number;

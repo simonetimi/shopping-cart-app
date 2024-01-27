@@ -1,15 +1,35 @@
-import './App.css';
-import 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
+import { createContext, useState } from 'react';
 
 import Navbar from './components/Navbar';
-import Shop from './components/Shop';
+
+interface ClothingItem {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: { rate: number; count: number };
+  quantity: number;
+}
+
+interface Context {
+  cartState: ClothingItem[];
+  setCartState: (newState: ClothingItem[]) => void;
+}
+
+export const CartManager = createContext<Context | null>(null);
 
 function App() {
+  const { category } = useParams();
+  const [cartState, setCartState] = useState<ClothingItem[]>([]);
+
   return (
-    <>
+    <CartManager.Provider value={{ cartState, setCartState }}>
       <Navbar />
-      <Shop category="men's wear" />
-    </>
+      <Outlet context={[category]} />
+    </CartManager.Provider>
   );
 }
 
