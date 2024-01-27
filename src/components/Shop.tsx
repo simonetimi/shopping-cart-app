@@ -1,7 +1,6 @@
 import useStoreData from '../hooks/Data';
 import { useOutletContext } from 'react-router-dom';
 
-import Sidebar from './Sidebar';
 import Card from './Card';
 
 function Shop() {
@@ -33,6 +32,7 @@ function Shop() {
         description={item.description}
         category={item.category}
         image={item.image}
+        item={item}
       />
     ));
   };

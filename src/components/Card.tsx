@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { CartManager } from '../App';
+import { useContext, useState, ChangeEvent } from 'react';
+import { CartManager, ClothingItem } from '../App';
 
 interface CardProps {
   id: number;
@@ -8,9 +8,29 @@ interface CardProps {
   description: string;
   category: string;
   image: string;
+  item: ClothingItem;
 }
 
-function Card({ id, title, price, description, category, image }: CardProps) {
+function Card({
+  id,
+  title,
+  price,
+  description,
+  category,
+  image,
+  item,
+}: CardProps) {
+  const [itemQuantity, setItemQuantity] = useState(1);
+  const handleAdd = () => {
+    setItemQuantity((prev) => {
+      prev + 1;
+    });
+  };
+
+  const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setItemQuantity(Number(event.target.value));
+  };
+
   const cartContext = useContext(CartManager);
   if (!cartContext) {
     return null;
@@ -18,15 +38,23 @@ function Card({ id, title, price, description, category, image }: CardProps) {
   const { cartState, setCartState } = cartContext;
 
   return (
-    <div className="flex h-60 w-auto gap-6 rounded-xl bg-slate-200 p-4">
-      <img className="xrounded-xl rounded-lg border p-3" src={image}></img>
+    <div className="flex gap-6 rounded-xl bg-slate-200 p-4">
+      <img className="h-52 rounded-lg border p-3" src={image}></img>
       <div className="flex flex-col gap-4">
         <p className="font-bold">{title}</p>
         <p className="overflow-auto hyphens-auto text-justify">{description}</p>
         <div className="mt-auto flex items-center justify-center gap-3">
           <p className="mr-auto font-bold">Price: {price.toFixed(2)}€</p>
-          <input className="h-6 w-7 rounded-lg p-1" value="1" />
-          <button className="material-symbols-outlined rounded-full bg-white p-1 shadow-md shadow-gray-300 active:translate-y-0.5">
+          <input
+            className="h-6 w-11 rounded-lg p-1"
+            type="number"
+            value={itemQuantity}
+            onChange={handleQuantityChange}
+          />
+          <button
+            type="button"
+            className="material-symbols-outlined rounded-full bg-white p-1 shadow-md shadow-gray-300 active:translate-y-0.5"
+          >
             add
           </button>
         </div>

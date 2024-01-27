@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 
 import Navbar from './components/Navbar';
 
-interface ClothingItem {
+export interface ClothingItem {
   id: number;
   title: string;
   price: number;
@@ -11,7 +11,7 @@ interface ClothingItem {
   category: string;
   image: string;
   rating: { rate: number; count: number };
-  quantity: number;
+  quantity?: number;
 }
 
 interface Context {
