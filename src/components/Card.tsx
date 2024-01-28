@@ -55,7 +55,7 @@ function Card({
           <p className="mr-auto font-bold">{price.toFixed(2)}€</p>
           <input
             min="0"
-            className="h-6 w-11 rounded-lg p-1 text-xs"
+            className="h-6 w-11 rounded-lg p-1 text-right text-xs"
             type="number"
             value={itemQuantity}
             onChange={handleQuantityChange}

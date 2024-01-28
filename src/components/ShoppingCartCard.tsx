@@ -19,7 +19,7 @@ function ShoppingCartCard({
   price,
   image,
   quantity,
-  item,
+  description,
   cartState,
   setCartState,
 }: ShoppingCartCardProps) {
@@ -47,15 +47,16 @@ function ShoppingCartCard({
   };
 
   return (
-    <div className="flex w-[600px] gap-6 self-center rounded-xl bg-slate-200 p-4">
+    <div className="flex gap-6 rounded-xl bg-slate-200 p-4">
       <img className="h-52 rounded-lg border p-3" src={image} />
       <div className="flex flex-col gap-4">
         <p className="font-bold">{title}</p>
+        <p className="overflow-auto hyphens-auto text-justify">{description}</p>
         <div className="mt-auto flex items-center justify-center gap-3">
           <p className="mr-auto font-bold">{(price * quantity).toFixed(2)}€</p>
           <input
             min="1"
-            className="h-6 w-11 rounded-lg p-1 text-xs"
+            className="h-6 w-11 rounded-lg p-1 text-right text-xs"
             type="number"
             onChange={handleQuantityChange}
             value={itemQuantity}
