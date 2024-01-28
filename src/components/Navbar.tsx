@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import type { ClothingItem } from '../App';
 import { Link } from 'react-router-dom';
 
@@ -10,10 +11,12 @@ function Navbar({ cartState }: NavbarProps) {
     String.raw({ raw: strings }, ...values);
   const menuStyles = tw`rounded-lg bg-white p-1.5 shadow-md active:translate-y-0.5`;
 
-  const sumItems = cartState.reduce(
-    (accumulator, currentItem) => accumulator + Number(currentItem.quantity),
-    0
-  );
+  const sumItems = useMemo(() => {
+    return cartState.reduce(
+      (accumulator, currentItem) => accumulator + Number(currentItem.quantity),
+      0
+    );
+  }, [cartState]);
 
   return (
     <nav className="col-span-full flex h-16 items-center justify-between border-b-[1px] shadow-sm shadow-slate-200">
