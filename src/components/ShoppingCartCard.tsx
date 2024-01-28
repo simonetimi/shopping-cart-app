@@ -24,6 +24,7 @@ function ShoppingCartCard({
   setCartState,
 }: ShoppingCartCardProps) {
   const [itemQuantity, setItemQuantity] = useState(quantity);
+
   const handleDelete = () => {
     const targetIndex = cartState.findIndex((item) => item.id === id);
     const copiedState = [...cartState];
@@ -36,7 +37,13 @@ function ShoppingCartCard({
   };
 
   const handleEdit = () => {
-    const targetIndex = cartState.findIndex((item) => item.id === id);
+    const newCart = cartState.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: itemQuantity };
+      }
+      return item;
+    });
+    setCartState(newCart);
   };
 
   return (
@@ -55,6 +62,7 @@ function ShoppingCartCard({
           />
           <button
             type="button"
+            onClick={handleEdit}
             className="material-symbols-outlined rounded-full bg-white p-1 shadow-md shadow-gray-300 active:translate-y-0.5"
           >
             edit

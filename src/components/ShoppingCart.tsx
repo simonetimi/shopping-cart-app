@@ -35,10 +35,21 @@ function ShoppingCart() {
       );
     });
 
+  function totalPrice() {
+    return cartState.reduce(
+      (accumulator, currentItem) =>
+        accumulator + Number(currentItem.price * currentItem.quantity!),
+      0
+    );
+  }
+
   return (
     <main className="col-start-2 col-end-5 row-start-2 row-end-3 m-4 flex h-full flex-col flex-wrap justify-center gap-8 pb-6">
       <h1 className="self-center text-4xl">Shopping Cart</h1>
       {populateShoppingCart()}
+      <p className="mr-36 self-end text-xl font-bold">
+        Total: {totalPrice().toFixed(2)}€
+      </p>
     </main>
   );
 }
