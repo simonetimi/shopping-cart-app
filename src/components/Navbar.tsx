@@ -38,13 +38,11 @@ function Navbar({ cartState }: NavbarProps) {
       <button className="material-symbols-outlined mr-6 rounded-full bg-white p-1.5 shadow-md shadow-gray-300 active:translate-y-0.5">
         shopping_cart
       </button>
-      <p className="absolute right-0 top-0 mr-4 mt-10 h-5 w-auto rounded-full bg-amber-500 p-1 text-center text-xs leading-none">
-        {sumItems}
+      <p className="absolute right-0 top-0 mr-4 mt-10 flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 p-1 text-center text-xs leading-none">
+        {sumItems < 100 ? sumItems : <span className="text-[9px]">99+</span>}
       </p>
     </nav>
   );
 }
-
-// not cartState.length but the sum of all the lenghts
 
 export default Navbar;

@@ -49,7 +49,7 @@ function Shop() {
   }
 
   return (
-    <main className="col-start-2 col-end-5 row-start-2 row-end-3 m-4 flex h-full flex-wrap gap-8">
+    <main className="col-start-2 col-end-5 row-start-2 row-end-3 m-4 flex h-full flex-wrap gap-8 pb-6">
       {populateShop}
     </main>
   );
