@@ -20,7 +20,7 @@ const useStoreData = (category: string) => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://fakestoreapi.com/products/category/${category}`
+          `https://fakestoreapi.com/products/category/${category}`,
         );
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);

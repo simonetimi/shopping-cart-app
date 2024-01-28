@@ -1,9 +1,19 @@
+import type { ClothingItem } from '../App';
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+interface NavbarProps {
+  cartState: ClothingItem[];
+}
+
+function Navbar({ cartState }: NavbarProps) {
   const tw = (strings: TemplateStringsArray, ...values: string[]) =>
     String.raw({ raw: strings }, ...values);
   const menuStyles = tw`rounded-lg bg-white p-1.5 shadow-md active:translate-y-0.5`;
+
+  const sumItems = cartState.reduce(
+    (accumulator, currentItem) => accumulator + Number(currentItem.quantity),
+    0
+  );
 
   return (
     <nav className="col-span-full flex h-16 items-center justify-between border-b-[1px] shadow-sm shadow-slate-200">
@@ -28,8 +38,13 @@ function Navbar() {
       <button className="material-symbols-outlined mr-6 rounded-full bg-white p-1.5 shadow-md shadow-gray-300 active:translate-y-0.5">
         shopping_cart
       </button>
+      <p className="absolute right-0 top-0 mr-4 mt-10 h-5 w-auto rounded-full bg-amber-500 p-1 text-center text-xs leading-none">
+        {sumItems}
+      </p>
     </nav>
   );
 }
+
+// not cartState.length but the sum of all the lenghts
 
 export default Navbar;
