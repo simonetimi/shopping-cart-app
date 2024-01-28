@@ -29,10 +29,10 @@ function Card({
 
   const handleAdd = () => {
     const newItem = { ...item, quantity: itemQuantity };
+    setItemQuantity(1);
     const itemIndex = cartState.findIndex((item) => item.id === id);
     if (itemIndex === -1) {
       setCartState([...cartState, newItem]);
-      console.log(cartState);
     } else {
       const updatedCart = cartState.map((cartItem, index) => {
         if (index === itemIndex) {
@@ -42,7 +42,6 @@ function Card({
         return cartItem;
       });
       setCartState(updatedCart);
-      console.log(cartState);
     }
   };
 

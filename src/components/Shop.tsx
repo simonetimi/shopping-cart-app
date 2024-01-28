@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import Card from './Card';
 import type { ClothingItem } from '~/App';
 
-interface OutletContext {
+export interface OutletContext {
   category: string;
   cartState: ClothingItem[];
   setCartState: (newCart: ClothingItem[]) => void;
@@ -13,11 +13,8 @@ function Shop() {
   const { category, cartState, setCartState }: OutletContext =
     useOutletContext();
   const { storedData, error, isLoading } = useStoreData(category);
-  // const cartState: ClothingItem[] = useOutletContext();
-  // const setCartState: (newCart: ClothingItem[]) => void = useOutletContext();
 
   const populateShop = storedData.map((item) => {
-    console.log(category);
     return (
       <Card
         key={item.id}
@@ -49,7 +46,10 @@ function Shop() {
   }
 
   return (
-    <main className="col-start-2 col-end-5 row-start-2 row-end-3 m-4 flex h-full flex-wrap gap-8 pb-6">
+    <main className="col-start-2 col-end-5 row-start-2 row-end-3 m-4 flex h-full flex-wrap justify-center gap-8 pb-6">
+      <h1 className="text-4xl">
+        {category === "men's clothing" ? "Men's" : "Women's"} wear
+      </h1>
       {populateShop}
     </main>
   );
